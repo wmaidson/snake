@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener {
 
-
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
@@ -22,7 +21,6 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer timer;
     Random random;
 
-
     GamePanel(){
          random = new Random();
          this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -37,7 +35,6 @@ public class GamePanel extends JPanel implements ActionListener {
         running = true;
         timer = new Timer(DELAY, this);
         timer.start();
-
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -45,25 +42,44 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void draw(Graphics g) {
-        for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
-            g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
-            g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH , i * UNIT_SIZE);
-        }
-        g.setColor(Color.RED);
-        g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 
-        for(int i = 0; i < bodyParts; i++) {
-            if(i == 0) {
-                g.setColor(Color.green);
-                g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+        if (running) {
+
+            /*
+            If you want to put the gridlines remove this comment
+            Se voce quiser colocar as linhas de grade remova esse comentario
+
+            for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
+                g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
+                g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
             }
-            else {
-                g.setColor(new Color(45, 100,0));
-                g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+             */
+            g.setColor(Color.RED);
+            g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+
+            for (int i = 0; i < bodyParts; i++) {
+                if (i == 0) {
+                    g.setColor(Color.green);
+                    g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                } else {
+                    g.setColor(new Color(45, 100, 0));
+
+                    /* If you want to use the snake with the colored coloration, remove the comment
+                    Se você quiser usar a cobra com a coloração colorida, remova o comentário
+
+                    g.setColor(new Color(random.nextInt(255), random.nextInt(255),random.nextInt(255)));
+                    g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                     */
+                }
             }
-
+            g.setColor(Color.red);
+            g.setFont(new Font("Ink Free", Font.BOLD, 40));
+            FontMetrics metrics = getFontMetrics(g.getFont());
+            g.drawString("Score " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score " + applesEaten)) / 2, g.getFont().getSize());
         }
-
+        else {
+            gameOver(g);
+        }
     }
 
     public void newApple() {
@@ -90,10 +106,13 @@ public class GamePanel extends JPanel implements ActionListener {
                 x[0] = x[0] + UNIT_SIZE;
                 break;
         }
-
     }
     public void checkApple() {
-
+        if((x[0] == appleX) && (y[0] == appleY)) {
+            bodyParts++;
+            applesEaten++;
+            newApple();
+        }
     }
 
     public void checkCollisions() {
@@ -126,7 +145,17 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void gameOver(Graphics g) {
+        //score
+        g.setColor(Color.red);
+        g.setFont(new Font("Ink Free", Font.BOLD, 40));
+        FontMetrics metrics1 = getFontMetrics(g.getFont());
+        g.drawString("Score " + applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score " + applesEaten)) / 2, g.getFont().getSize());
 
+        //Game Over text
+        g.setColor(Color.red);
+        g.setFont(new Font("Ink Free", Font.BOLD, 75));
+        FontMetrics metrics2 = getFontMetrics(g.getFont());
+        g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over")) / 2, SCREEN_HEIGHT / 2);
     }
 
     @Override
@@ -138,7 +167,6 @@ public class GamePanel extends JPanel implements ActionListener {
             checkCollisions();
         }
         repaint();
-
     }
     
     public class MyKeyAdapter extends KeyAdapter {
@@ -165,7 +193,6 @@ public class GamePanel extends JPanel implements ActionListener {
                     direction = 'D';
                 }
                 break;
-
             }
         }
     }
