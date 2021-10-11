@@ -68,8 +68,9 @@ public class GamePanel extends JPanel implements ActionListener {
                     Se você quiser usar a cobra com a coloração colorida, remova o comentário
 
                     g.setColor(new Color(random.nextInt(255), random.nextInt(255),random.nextInt(255)));
-                    g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                      */
+                    g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                    
                 }
             }
             g.setColor(Color.red);
