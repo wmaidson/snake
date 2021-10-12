@@ -7,7 +7,7 @@ sendo feitas várias imitações em vídeo-games e computadores.
 <img alt="snake-1." src=".github/snake-1.png" height="500px" />
 </h1>
 
-# Game Over
+### Game Over
 
 - A variável  `static final int DELAY = 75;` é responsável pela velocidade da cobrinha se estiver muito rápido você pode amentar o tempo de delay,
 e se tiver muito lento pode diminuir.
@@ -18,7 +18,7 @@ e se tiver muito lento pode diminuir.
 </h1>
 
 
-# Linhas de Grade
+### Linhas de Grade
 Você pode remover as linhas de grade comentando ou removendo esse trecho de código
 
 ```java
@@ -32,7 +32,7 @@ for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
 <img alt="snake-2." src=".github/snake-2.png" height="500px" />
 </h1>
 
-# Cobrinha colorida
+### Cobrinha colorida
 
  Se você quiser usar a cobra com a coloração colorida, remova o comentando ou removendo esse trecho de código
  
@@ -45,7 +45,7 @@ for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
 </h1>
 
 
- # Executando a aplicação
+ ### Executando a aplicação
  
  - Necessário ter o [JDK](https://www.oracle.com/br/java/technologies/javase/javase8-archive-downloads.html) (Java Development Kit) instalado em seu computador,
  configurado em sua IDE de preferência ou em sua variável de ambiente [PATH](https://www.java.com/pt-BR/download/help/path_pt-br.html) para poder execuar ela em seu terminal.
